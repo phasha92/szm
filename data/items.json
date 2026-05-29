@@ -79,7 +79,7 @@
     "tags": ["veggie"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/spicy_nigiri/avocado.webp",
       "comp": "авокадо / карри / острый соус",
       "kcal": 210, "b": 3, "j": 8, "u": 31
     }
@@ -91,7 +91,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/spicy_nigiri/tuna.webp",
       "comp": "тунец / карри / острый соус",
       "kcal": 230, "b": 15, "j": 7, "u": 26
     }
@@ -103,7 +103,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/spicy_nigiri/eel.webp",
       "comp": "угорь / карри / острый соус",
       "kcal": 280, "b": 13, "j": 11, "u": 32
     }
@@ -115,7 +115,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/spicy_nigiri/salmon.webp",
       "comp": "лосось / карри / острый соус",
       "kcal": 260, "b": 16, "j": 10, "u": 28
     }
