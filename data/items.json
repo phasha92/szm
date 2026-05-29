@@ -6,7 +6,7 @@
     "tags": ["veggie"],
     "desc": "",
     "detail": {
-      "img": "data/image/avocado.webp",
+      "img": "data/images/nigiri/avocado.webp",
       "comp": "рис / авокадо",
       "kcal": 120, "b": 2, "j": 5, "u": 18
     }
@@ -18,7 +18,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": "data/image/shrimp.webp",
+      "img": "data/images/nigiri/shrimp.webp",
       "comp": "рис / креветка",
       "kcal": 145, "b": 10, "j": 3, "u": 18
     }
@@ -30,7 +30,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": "data/image/tuna.webp",
+      "img": "data/images/nigiri/tuna.webp",
       "comp": "рис / тунец",
       "kcal": 130, "b": 12, "j": 2, "u": 17
     }
@@ -42,7 +42,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": "data/image/eel.webp",
+      "img": "data/images/nigiri/eel.webp",
       "comp": "рис / угорь",
       "kcal": 190, "b": 10, "j": 8, "u": 20
     }
@@ -54,7 +54,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/nigiri/scallop.webp",
       "comp": "рис / морской гребешок",
       "kcal": 150, "b": 14, "j": 3, "u": 18
     }
@@ -66,7 +66,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/nigiri/salmon.webp",
       "comp": "рис / лосось",
       "kcal": 175, "b": 14, "j": 7, "u": 18
     }
