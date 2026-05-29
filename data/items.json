@@ -42,7 +42,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/image/eel.webp",
       "comp": "рис / угорь",
       "kcal": 190, "b": 10, "j": 8, "u": 20
     }
