@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subzero Market 2 — Меню</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #fff;
+      color: #111;
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      font-weight: 300;
+      padding-bottom: 0;
+    }
+
+    /* ── LOADING ── */
+    .loading {
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; font-size: 12px; color: #bbb; letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ── HEADER ── */
+    .header { padding: clamp(1.5rem, 5vw, 2.5rem); border-bottom: 1px solid #111; }
+    .logo { font-size: clamp(34px, 8vw, 56px); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+    .logo-sub { margin-top: 4px; color: #888; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+    .legend { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; font-size: 11px; color: #777; line-height: 1.5; }
+
+    /* ── FILTERS / NAV ── */
+    .filters, .cat-nav { display: flex; overflow-x: auto; scrollbar-width: none; }
+    .filters::-webkit-scrollbar, .cat-nav::-webkit-scrollbar { display: none; }
+    .filters { gap: 8px; padding: 12px 18px; border-bottom: 1px solid #eee; align-items: center; }
+    .filter-label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: .08em; flex-shrink: 0; }
+
+    .ftag, .cat-btn, .add-btn {
+      font-family: inherit; cursor: pointer;
+      border: 1px solid #ccc; background: #fff; transition: .15s ease;
+    }
+    .ftag { padding: 7px 12px; font-size: 12px; color: #777; white-space: nowrap; }
+    .ftag.on { color: #111; border-color: #111; }
+
+    .cat-nav { border-bottom: 1px solid #111; position: sticky; top: 0; z-index: 100; background: #fff; }
+    .cat-btn {
+      border: none; border-right: 1px solid #eee;
+      padding: 13px 16px; color: #888;
+      text-transform: uppercase; letter-spacing: .08em;
+      white-space: nowrap; font-size: 12px; min-height: 44px;
+    }
+    .cat-btn.active { color: #111; font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 0 18px; }
+    .section-label { margin-top: 32px; margin-bottom: 4px; font-size: 22px; text-transform: uppercase; font-weight: 500; letter-spacing: .06em; }
+    .section-sub { color: #999; font-size: 11px; margin-bottom: 10px; }
+
+    /* ── ROLLS 2-COLUMN GRID ── */
+    .rolls-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0 1px; background: #ebebeb; margin: 0 -18px;
+    }
+    .rolls-col { background: #fff; padding: 0 14px; }
+    .rolls-col-label {
+      font-size: 11px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: .08em; color: #555; padding: 14px 0 4px;
+      border-bottom: 1px solid #eee;
+    }
+    .rolls-col-sub { font-size: 10px; color: #bbb; line-height: 1.5; padding: 3px 0 6px; border-bottom: 1px solid #f5f5f5; }
+    .rolls-subgroup-label {
+      font-size: 14px; color: #111; letter-spacing: .01em;
+      padding: 12px 0 4px; border-bottom: 1px dotted #eee;
+    }
+    .rolls-subgroup-sub { font-size: 10px; color: #bbb; padding: 2px 0 4px; }
+
+    @media (max-width: 460px) {
+      .rolls-grid { grid-template-columns: 1fr; background: none; margin: 0; }
+      .rolls-col { padding: 0; border-bottom: 1px solid #eee; }
+      .rolls-col:last-child { border-bottom: none; }
+      .rolls-col-label { padding-top: 18px; }
+    }
+
+    /* ── ITEMS ── */
+    .item { border-bottom: 1px solid #f1f1f1; }
+    .item-top { display: flex; align-items: center; gap: 8px; padding: 13px 0; min-height: 48px; }
+    .item-main { flex: 1; min-width: 0; cursor: pointer; }
+    .item-name { font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .item-desc { color: #999; font-size: 11px; margin-top: 3px; line-height: 1.5; }
+    .item-dots { flex: 1; min-width: 6px; border-bottom: 1px dotted #ccc; margin-top: 6px; flex-shrink: 1; }
+    .item-price { white-space: nowrap; font-size: 14px; flex-shrink: 0; }
+
+    .add-btn {
+      min-width: 34px; height: 34px; border-color: #111; font-size: 20px; line-height: 1;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .add-btn:active { background: #111; color: #fff; }
+    .add-btn.disabled { border-color: #ddd; color: #ddd; pointer-events: none; }
+
+    /* ── DETAIL PANEL ── */
+    .detail-panel { display: none; margin-bottom: 10px; border: 1px solid #ddd; background: #fafafa; padding: 12px 14px; }
+    .detail-panel.open { display: block; }
+    .dp-img-wrap {
+      width: 100%; aspect-ratio: 4/3; margin-bottom: 10px;
+      position: relative; overflow: hidden; background: #f0f0f0;
+    }
+    .dp-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .dp-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+    .dp-img.loaded {
+      opacity: 1;
+    }
+    .dp-img-placeholder {
+      width: 100%; aspect-ratio: 4/3; background: #f0f0f0;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px; font-size: 11px; color: #bbb; letter-spacing: .04em;
+    }
+    .dp-comp { font-size: 11px; color: #666; line-height: 1.6; margin-bottom: 8px; }
+    .dp-macros-line {
+      font-size: 11px; color: #aaa; display: flex; flex-wrap: wrap; gap: 10px;
+      padding-top: 8px; border-top: 1px solid #eee;
+    }
+    .dp-macros-line b { color: #555; font-weight: 400; }
+
+    /* ── BOTTOM BAR ── */
+    .bottom-bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(8px);
+      border-top: 1px solid #111; z-index: 999;
+    }
+    .bar-strip { display: flex; align-items: center; gap: 8px; padding: 11px 14px; min-height: 54px; }
+    .bar-summary { flex: 1; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; min-width: 0; }
+    .bar-count { font-size: 12px; color: #999; white-space: nowrap; }
+    .bar-total { font-size: 14px; font-weight: 500; white-space: nowrap; }
+    .bar-actions { display: flex; gap: 7px; flex-shrink: 0; }
+    .bar-btn {
+      font-family: inherit; cursor: pointer; border: 1px solid #111; background: #fff;
+      padding: 7px 11px; font-size: 11px; text-transform: uppercase;
+      letter-spacing: .05em; white-space: nowrap; min-height: 36px;
+    }
+    .bar-btn.primary { background: #111; color: #fff; }
+    .bar-btn:active { opacity: .7; }
+
+    .bar-panel { display: none; border-top: 1px solid #eee; max-height: 55vh; overflow-y: auto; }
+    .bar-panel.open { display: block; }
+
+    .cart-list { padding: 0 14px; }
+    .cart-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 0; border-bottom: 1px solid #f3f3f3; font-size: 13px;
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-name { flex: 1; min-width: 0; font-size: 12px; line-height: 1.4; }
+    .cart-count { color: #aaa; font-size: 12px; flex-shrink: 0; }
+    .cart-price { flex-shrink: 0; font-size: 13px; }
+    .cart-remove {
+      flex-shrink: 0; background: none; border: none; cursor: pointer;
+      font-size: 13px; color: #ccc; padding: 2px 0 2px 6px;
+      font-family: inherit; line-height: 1;
+    }
+    .cart-remove:active { color: #111; }
+    .cart-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 11px 14px; border-top: 1px solid #111;
+    }
+    .cart-total-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #888; }
+    .cart-total-val { font-size: 15px; font-weight: 500; }
+    .cart-kcal {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      padding: 9px 14px 13px; font-size: 11px; color: #bbb;
+      border-top: 1px dotted #eee;
+    }
+    .cart-kcal b { color: #777; font-weight: 400; }
+
+    .note { padding: 28px 18px; color: #aaa; font-size: 11px; line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div class="loading">Загрузка меню…</div>
+</div>
+
+<!-- ── BOTTOM BAR ── -->
+<div class="bottom-bar" id="bottomBar" style="display:none">
+  <div class="bar-strip">
+    <div class="bar-summary">
+      <span class="bar-count" id="barCount"></span>
+      <span class="bar-total" id="barTotal"></span>
+    </div>
+    <div class="bar-actions">
+      <button class="bar-btn primary" id="calcToggleBtn" onclick="togglePanel()" style="display:none">Ваш выбор</button>
+      <button class="bar-btn" onclick="resetCalculator()" id="resetBtn" style="display:none">Сбросить</button>
+    </div>
+  </div>
+  <div class="bar-panel" id="barPanel">
+    <div id="cartList"></div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY       = 'subzero_calc';
+  const LAST_ACTIVITY_KEY = 'subzero_last_activity';
+  const THIRTY_MIN        = 1000 * 60 * 30;
+
+  /* ── ГЛОБАЛЬНЫЕ ДАННЫЕ ── */
+  let filters    = [];
+  let categories = [];
+  let items      = [];
+
+  /* ── СОСТОЯНИЕ ── */
+  let activeFilters = new Set();
+  let activeCat     = 'all';
+  let openItem      = null;
+  let calculator    = [];
+  let panelOpen     = false;
+  const itemRegistry = {};
+
+  /* ════════════════════════════════
+     ЗАГРУЗКА ДАННЫХ
+  ════════════════════════════════ */
+  async function loadData() {
+    try {
+      const [f, c, i] = await Promise.all([
+        fetch('data/filters.json').then(r => r.json()),
+        fetch('data/categories.json').then(r => r.json()),
+        fetch('data/items.json').then(r => r.json()),
+      ]);
+      filters    = f;
+      categories = c;
+      items      = i;
+      initApp();
+    } catch (e) {
+      document.getElementById('app').innerHTML =
+        '<div class="loading">Ошибка загрузки данных.<br>Попробуйте обновить страницу.</div>';
+    }
+  }
+
+  /* ════════════════════════════════
+     ИНИЦИАЛИЗАЦИЯ
+  ════════════════════════════════ */
+  function initApp() {
+    const app = document.getElementById('app');
+
+    app.innerHTML = `
+      <div class="header">
+        <div class="logo">Subzero</div>
+        <div class="logo-sub">Market 2</div>
+        <div class="legend">
+          ${filters.map(f => `<div>${f.label}</div>`).join('')}
+        </div>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Фильтр</span>
+        ${filters.map(f =>
+          `<button class="ftag" data-filter="${f.id}" onclick="toggleF('${f.id}')">${f.label}</button>`
+        ).join('')}
+      </div>
+
+      <nav class="cat-nav" id="catNav"></nav>
+      <div id="content"></div>
+
+      <p class="note">
+        Если у вас есть аллергия или чувствительность к продуктам — сообщите перед заказом.<br>
+        Большинство блюд содержит орехи. Состав и рецепт блюд не корректируется.
+      </p>
+    `;
+
+    loadCalculator();
+    render();
+  }
+
+  /* ════════════════════════════════
+     STORAGE
+  ════════════════════════════════ */
+  function saveActivity() { localStorage.setItem(LAST_ACTIVITY_KEY, Date.now()); }
+
+  function clearIfExpired() {
+    const last = Number(localStorage.getItem(LAST_ACTIVITY_KEY) || 0);
+    if (last && Date.now() - last > THIRTY_MIN) localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function loadCalculator() {
+    clearIfExpired();
+    try { calculator = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { calculator = []; }
+    updateBar();
+  }
+
+  function saveCalculator() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(calculator));
+    saveActivity();
+  }
+
+  /* ════════════════════════════════
+     КАЛЬКУЛЯТОР
+  ════════════════════════════════ */
+  function addToCalculator(registryKey) {
+    const { item, sectionLabel } = itemRegistry[registryKey];
+    const fullName = sectionLabel + ' · ' + item.name;
+    const existing = calculator.find(i => i.fullName === fullName);
+    if (existing) {
+      existing.count++;
+    } else {
+      calculator.push({ fullName, count: 1, price: item.price,
+        kcal: item.detail.kcal, b: item.detail.b, j: item.detail.j, u: item.detail.u });
+    }
+    saveCalculator();
+    updateBar();
+  }
+
+  function removeFromCalculator(index) {
+    calculator[index].count--;
+    if (calculator[index].count <= 0) calculator.splice(index, 1);
+    if (calculator.length === 0) panelOpen = false;
+    saveCalculator();
+    updateBar();
+  }
+
+  function resetCalculator() {
+    calculator = []; panelOpen = false;
+    localStorage.removeItem(STORAGE_KEY);
+    updateBar();
+  }
+
+  function togglePanel() {
+    if (!calculator.length) return;
+    panelOpen = !panelOpen;
+    updateBar();
+  }
+
+  function plural(n, one, few, many) {
+    const m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+    return many;
+  }
+
+  /* ════════════════════════════════
+     BAR UPDATE
+  ════════════════════════════════ */
+  function updateBar() {
+    const count      = calculator.reduce((s, i) => s + i.count, 0);
+    const totalPrice = calculator.reduce((s, i) => s + i.price * i.count, 0);
+    const totalKcal  = calculator.reduce((s, i) => s + i.kcal  * i.count, 0);
+    const totalB     = calculator.reduce((s, i) => s + i.b     * i.count, 0);
+    const totalJ     = calculator.reduce((s, i) => s + i.j     * i.count, 0);
+    const totalU     = calculator.reduce((s, i) => s + i.u     * i.count, 0);
+
+    document.getElementById('barCount').textContent =
+      count > 0 ? count + '\u00a0' + plural(count, 'позиция', 'позиции', 'позиций') : '';
+    document.getElementById('barTotal').textContent =
+      totalPrice > 0 ? totalPrice.toLocaleString('ru') + '\u00a0₽' : '';
+
+    const bar = document.getElementById('bottomBar');
+    bar.style.display = count > 0 ? '' : 'none';
+    document.getElementById('resetBtn').style.display      = count > 0 ? '' : 'none';
+    document.getElementById('calcToggleBtn').style.display = count > 0 ? '' : 'none';
+    document.getElementById('calcToggleBtn').textContent   = panelOpen ? 'Скрыть' : 'Ваш выбор';
+
+    let listHtml = '';
+    if (calculator.length === 0) {
+      listHtml = '<div style="padding:16px 14px;font-size:12px;color:#ccc;text-align:center;">Добавьте позиции нажав +</div>';
+    } else {
+      listHtml += '<div class="cart-list">';
+      calculator.forEach((item, idx) => {
+        listHtml += `<div class="cart-item">
+          <div class="cart-name">${item.fullName}</div>
+          <div class="cart-count">×${item.count}</div>
+          <div class="cart-price">${(item.price * item.count).toLocaleString('ru')} ₽</div>
+          <button class="cart-remove" onclick="removeFromCalculator(${idx})">✕</button>
+        </div>`;
+      });
+      listHtml += `</div>
+      <div class="cart-total">
+        <span class="cart-total-label">Итого</span>
+        <span class="cart-total-val">${totalPrice.toLocaleString('ru')} ₽</span>
+      </div>
+      <div class="cart-kcal">
+        <span><b>${totalKcal}</b> ккал</span>
+        <span>Б: <b>${totalB}г</b></span>
+        <span>Ж: <b>${totalJ}г</b></span>
+        <span>У: <b>${totalU}г</b></span>
+      </div>`;
+    }
+    document.getElementById('cartList').innerHTML = listHtml;
+    document.getElementById('barPanel').classList.toggle('open', panelOpen);
+
+    document.body.style.paddingBottom =
+      count > 0 ? (panelOpen ? document.getElementById('bottomBar').offsetHeight : 72) + 'px' : '0px';
+  }
+
+  /* ════════════════════════════════
+     ФИЛЬТРЫ И НАВИГАЦИЯ
+  ════════════════════════════════ */
+  function toggleF(f) {
+    activeFilters.has(f) ? activeFilters.delete(f) : activeFilters.add(f);
+    document.querySelectorAll('.ftag').forEach(btn =>
+      btn.classList.toggle('on', activeFilters.has(btn.dataset.filter))
+    );
+    render();
+  }
+
+  function setCat(id) { activeCat = id; openItem = null; render(); }
+
+  function openDetail(key) {
+    openItem = openItem === key ? null : key;
+    render();
+    if (openItem) {
+      setTimeout(() => {
+        const el = document.getElementById('dp_' + key);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 40);
+    }
+  }
+
+  function isLunchTime() {
+    const now = new Date(), d = now.getDay(), cur = now.getHours() * 60 + now.getMinutes();
+    return d >= 1 && d <= 5 && cur >= 660 && cur <= 900;
+  }
+
+  function filterItems(arr) {
+    if (!activeFilters.size) return arr;
+    return arr.filter(i => [...activeFilters].some(t => i.tags.includes(t)));
+  }
+
+  /* ════════════════════════════════
+     РЕНДЕР ПОЗИЦИИ
+  ════════════════════════════════ */
+  function renderItem(item, key, sectionLabel) {
+    itemRegistry[key] = { item, sectionLabel };
+
+    const isOpen   = openItem === key;
+    const disabled = item.lunchOnly && !isLunchTime() ? ' disabled' : '';
+    const badges   =
+      (item.tags.includes('market') ? '<span>★</span>' : '') +
+      (item.tags.includes('veggie') ? '<span>☆</span>' : '') +
+      (item.tags.includes('fried')  ? '<span>✦</span>' : '');
+
+    return `<div class="item">
+      <div class="item-top">
+        <div class="item-main" onclick="openDetail('${key}')">
+          <div class="item-name">${item.name} ${badges}</div>
+          ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
+        </div>
+        <div class="item-dots"></div>
+        <div class="item-price">${item.price} ₽</div>
+        <button class="add-btn${disabled}" onclick="addToCalculator('${key}')">+</button>
+      </div>
+      <div class="detail-panel ${isOpen ? 'open' : ''}" id="dp_${key}">
+        ${item.detail.img
+          ? `<div class="dp-img-wrap">
+               <img class="dp-img" src="${item.detail.img}" alt="${item.name}" loading="lazy"
+                    onload="this.classList.add('loaded')"
+                    onerror="this.closest('.dp-img-wrap').innerHTML='<div style=\'width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:11px;color:#bbb;\'>фото недоступно</div>'">
+             </div>`
+          : `<div class="dp-img-placeholder">фото блюда</div>`
+        }
+        <div class="dp-comp">${item.detail.comp}</div>
+        <div class="dp-macros-line">
+          <span><b>${item.detail.kcal}</b> ккал</span>
+          <span>Б: <b>${item.detail.b}г</b></span>
+          <span>Ж: <b>${item.detail.j}г</b></span>
+          <span>У: <b>${item.detail.u}г</b></span>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  /* ════════════════════════════════
+     ОСНОВНОЙ РЕНДЕР
+  ════════════════════════════════ */
+  function render() {
+    const nav     = document.getElementById('catNav');
+    const content = document.getElementById('content');
+    if (!nav || !content) return;
+
+    /* Навигация */
+    const cats = [{ id: 'all', label: 'Всё' }, ...categories.map(c => ({ id: c.id, label: c.label }))];
+    nav.innerHTML = cats.map(c =>
+      `<button class="cat-btn ${c.id === activeCat ? 'active' : ''}" onclick="setCat('${c.id}')">${c.label}</button>`
+    ).join('');
+
+    /* Секции */
+    const sections = activeCat === 'all' ? categories : categories.filter(c => c.id === activeCat);
+    let html = '';
+
+    sections.forEach(cat => {
+      const catItems = items.filter(i => i.categoryId === cat.id);
+
+      /* ── РОЛЛЫ с колонками ── */
+      if (cat.columns) {
+        let colsHtml = '', anyVisible = false;
+
+        cat.columns.forEach(col => {
+          let colBody = '';
+
+          if (col.subgroups) {
+            /* колонка с подгруппами (Жареные) */
+            col.subgroups.forEach(sg => {
+              const sgItems = filterItems(catItems.filter(i => i.columnId === col.id && i.subgroupId === sg.id));
+              if (!sgItems.length) return;
+              colBody += `<div class="rolls-subgroup-label">${sg.label}</div>`;
+              if (sg.sub) colBody += `<div class="rolls-subgroup-sub">${sg.sub}</div>`;
+              sgItems.forEach((item, idx) => {
+                const key = `${cat.id}_${col.id}_${sg.id}_${idx}`;
+                colBody += renderItem(item, key, `${cat.label} · ${sg.label}`);
+              });
+            });
+          } else {
+            /* обычная колонка (Татаки) */
+            const colItems = filterItems(catItems.filter(i => i.columnId === col.id));
+            colItems.forEach((item, idx) => {
+              const key = `${cat.id}_${col.id}_${idx}`;
+              colBody += renderItem(item, key, `${cat.label} · ${col.label}`);
+            });
+          }
+
+          if (!colBody) return;
+          anyVisible = true;
+          colsHtml += `<div class="rolls-col">
+            <div class="rolls-col-label">${col.label}</div>
+            ${col.sub ? `<div class="rolls-col-sub">${col.sub}</div>` : ''}
+            ${colBody}
+          </div>`;
+        });
+
+        if (!anyVisible) return;
+        html += `<section class="section">
+          <div class="section-label">${cat.label}</div>
+          ${cat.sub ? `<div class="section-sub">${cat.sub}</div>` : ''}
+          <div class="rolls-grid">${colsHtml}</div>
+        </section>`;
+        return;
+      }
+
+      /* ── ОБЫЧНАЯ СЕКЦИЯ ── */
+      const visibleItems = filterItems(catItems.filter(i => !i.columnId));
+      if (!visibleItems.length) return;
+
+      html += `<section class="section">
+        <div class="section-label">${cat.label}</div>
+        ${cat.sub ? `<div class="section-sub">${cat.sub}</div>` : ''}
+        ${visibleItems.map((item, idx) => {
+          const key = `${cat.id}_${idx}`;
+          return renderItem(item, key, cat.label);
+        }).join('')}
+      </section>`;
+    });
+
+    content.innerHTML = html || '<div style="padding:40px;text-align:center;color:#aaa;">Ничего не найдено</div>';
+  }
+
+  window.addEventListener('click',       saveActivity);
+  window.addEventListener('touchstart',  saveActivity, { passive: true });
+  window.addEventListener('scroll',      saveActivity, { passive: true });
+
+  loadData();
+</script>
+</body>
+</html>

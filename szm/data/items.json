@@ -1,0 +1,395 @@
+[
+  {
+    "categoryId": "sushi",
+    "name": "Авокадо",
+    "price": 290,
+    "tags": ["veggie"],
+    "desc": "",
+    "detail": {
+      "img": "data/image/avocado.webp",
+      "comp": "рис / авокадо",
+      "kcal": 120, "b": 2, "j": 5, "u": 18
+    }
+  },
+  {
+    "categoryId": "sushi",
+    "name": "Креветка",
+    "price": 350,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": "data/image/shrimp.webp",
+      "comp": "рис / креветка",
+      "kcal": 145, "b": 10, "j": 3, "u": 18
+    }
+  },
+  {
+    "categoryId": "sushi",
+    "name": "Тунец",
+    "price": 390,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": "data/image/tuna.webp",
+      "comp": "рис / тунец",
+      "kcal": 130, "b": 12, "j": 2, "u": 17
+    }
+  },
+  {
+    "categoryId": "sushi",
+    "name": "Угорь",
+    "price": 390,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "рис / угорь",
+      "kcal": 190, "b": 10, "j": 8, "u": 20
+    }
+  },
+  {
+    "categoryId": "sushi",
+    "name": "Морской гребешок",
+    "price": 490,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "рис / морской гребешок",
+      "kcal": 150, "b": 14, "j": 3, "u": 18
+    }
+  },
+  {
+    "categoryId": "sushi",
+    "name": "Лосось",
+    "price": 550,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "рис / лосось",
+      "kcal": 175, "b": 14, "j": 7, "u": 18
+    }
+  },
+
+  {
+    "categoryId": "spicy",
+    "name": "Авокадо",
+    "price": 240,
+    "tags": ["veggie"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "авокадо / карри / острый соус",
+      "kcal": 210, "b": 3, "j": 8, "u": 31
+    }
+  },
+  {
+    "categoryId": "spicy",
+    "name": "Тунец",
+    "price": 390,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "тунец / карри / острый соус",
+      "kcal": 230, "b": 15, "j": 7, "u": 26
+    }
+  },
+  {
+    "categoryId": "spicy",
+    "name": "Угорь",
+    "price": 450,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "угорь / карри / острый соус",
+      "kcal": 280, "b": 13, "j": 11, "u": 32
+    }
+  },
+  {
+    "categoryId": "spicy",
+    "name": "Лосось",
+    "price": 550,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "лосось / карри / острый соус",
+      "kcal": 260, "b": 16, "j": 10, "u": 28
+    }
+  },
+
+  {
+    "categoryId": "rolls",
+    "columnId": "tataki",
+    "name": "Тунец",
+    "price": 730,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "тунец / манго / папайя / сыр / гуакамоле",
+      "kcal": 420, "b": 20, "j": 15, "u": 48
+    }
+  },
+  {
+    "categoryId": "rolls",
+    "columnId": "tataki",
+    "name": "Лосось",
+    "price": 890,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "лосось / манго / папайя / сыр / гуакамоле",
+      "kcal": 460, "b": 24, "j": 18, "u": 49
+    }
+  },
+
+  {
+    "categoryId": "rolls",
+    "columnId": "fried",
+    "subgroupId": "tartar",
+    "name": "Тунец",
+    "price": 790,
+    "tags": ["market", "fried"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "тунец / сыр / панировка",
+      "kcal": 510, "b": 22, "j": 24, "u": 50
+    }
+  },
+  {
+    "categoryId": "rolls",
+    "columnId": "fried",
+    "subgroupId": "tartar",
+    "name": "Морской гребешок",
+    "price": 890,
+    "tags": ["market", "fried"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "гребешок / сыр / панировка",
+      "kcal": 530, "b": 21, "j": 25, "u": 52
+    }
+  },
+  {
+    "categoryId": "rolls",
+    "columnId": "fried",
+    "subgroupId": "tartar",
+    "name": "Лосось",
+    "price": 890,
+    "tags": ["market", "fried"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "лосось / сыр / панировка",
+      "kcal": 560, "b": 25, "j": 28, "u": 50
+    }
+  },
+  {
+    "categoryId": "rolls",
+    "columnId": "fried",
+    "subgroupId": "tempura",
+    "name": "Тунец",
+    "price": 690,
+    "tags": ["market", "fried"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "тунец / сыр / икра / панировка",
+      "kcal": 490, "b": 23, "j": 22, "u": 48
+    }
+  },
+  {
+    "categoryId": "rolls",
+    "columnId": "fried",
+    "subgroupId": "tempura",
+    "name": "Лосось и угорь",
+    "price": 790,
+    "tags": ["market", "fried"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "лосось / угорь / сыр / панировка",
+      "kcal": 580, "b": 27, "j": 30, "u": 52
+    }
+  },
+
+  {
+    "categoryId": "special",
+    "name": "Зелёный",
+    "price": 490,
+    "tags": ["veggie"],
+    "desc": "авокадо / огурец / сыр · можно убрать лишнее",
+    "detail": {
+      "img": null,
+      "comp": "авокадо / огурец / сыр",
+      "kcal": 320, "b": 7, "j": 13, "u": 43
+    }
+  },
+  {
+    "categoryId": "special",
+    "name": "Темпура креветки",
+    "price": 690,
+    "tags": ["market"],
+    "desc": "манго / кинза / сыр / гуакамоле",
+    "detail": {
+      "img": null,
+      "comp": "креветки / манго / сыр",
+      "kcal": 470, "b": 20, "j": 20, "u": 50
+    }
+  },
+  {
+    "categoryId": "special",
+    "name": "Радуга",
+    "price": 850,
+    "tags": ["market"],
+    "desc": "лосось / креветка / тунец / угорь",
+    "detail": {
+      "img": null,
+      "comp": "микс рыбы / сыр / огурец",
+      "kcal": 520, "b": 30, "j": 20, "u": 50
+    }
+  },
+  {
+    "categoryId": "special",
+    "name": "Филадельфия",
+    "price": 850,
+    "tags": ["market"],
+    "desc": "лосось / сыр / икра",
+    "detail": {
+      "img": null,
+      "comp": "лосось / сыр / икра",
+      "kcal": 540, "b": 28, "j": 24, "u": 48
+    }
+  },
+  {
+    "categoryId": "special",
+    "name": "Лосось и татаки тунец",
+    "price": 890,
+    "tags": ["market"],
+    "desc": "сыр / огурец / икра",
+    "detail": {
+      "img": null,
+      "comp": "лосось / тунец / сыр",
+      "kcal": 510, "b": 32, "j": 19, "u": 44
+    }
+  },
+  {
+    "categoryId": "special",
+    "name": "Лосось и угорь",
+    "price": 950,
+    "tags": ["market"],
+    "desc": "сыр / огурец / листья салатов",
+    "detail": {
+      "img": null,
+      "comp": "лосось / угорь / сыр",
+      "kcal": 560, "b": 29, "j": 26, "u": 45
+    }
+  },
+
+  {
+    "categoryId": "soups",
+    "name": "Мисо с тофу",
+    "price": 390,
+    "tags": ["veggie"],
+    "desc": "лапша / ростки / грибы / водоросли",
+    "detail": {
+      "img": null,
+      "comp": "тофу / грибы / водоросли",
+      "kcal": 180, "b": 10, "j": 6, "u": 22
+    }
+  },
+  {
+    "categoryId": "soups",
+    "name": "Том ям с креветками",
+    "price": 590,
+    "tags": ["market"],
+    "desc": "лапша или рис / кукуруза / томат",
+    "detail": {
+      "img": null,
+      "comp": "креветки / томат / грибы",
+      "kcal": 390, "b": 24, "j": 15, "u": 38
+    }
+  },
+  {
+    "categoryId": "soups",
+    "name": "Рамен с говядиной",
+    "price": 590,
+    "tags": ["market"],
+    "desc": "лапша / яйцо / грибы / морковь",
+    "detail": {
+      "img": null,
+      "comp": "говядина / лапша / яйцо",
+      "kcal": 480, "b": 28, "j": 16, "u": 52
+    }
+  },
+
+  {
+    "categoryId": "poke",
+    "name": "Авокадо",
+    "price": 590,
+    "tags": ["veggie"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "рис / авокадо / томат",
+      "kcal": 420, "b": 9, "j": 15, "u": 58
+    }
+  },
+  {
+    "categoryId": "poke",
+    "name": "Тунец + авокадо",
+    "price": 790,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "тунец / авокадо / рис",
+      "kcal": 530, "b": 30, "j": 17, "u": 56
+    }
+  },
+  {
+    "categoryId": "poke",
+    "name": "Лосось + авокадо",
+    "price": 950,
+    "tags": ["market"],
+    "desc": "",
+    "detail": {
+      "img": null,
+      "comp": "лосось / авокадо / рис",
+      "kcal": 590, "b": 32, "j": 25, "u": 55
+    }
+  },
+
+  {
+    "categoryId": "starters",
+    "name": "Карааге",
+    "price": 450,
+    "tags": ["fried"],
+    "desc": "японская жареная курица",
+    "detail": {
+      "img": null,
+      "comp": "курица / панировка / соус",
+      "kcal": 520, "b": 28, "j": 30, "u": 32
+    }
+  },
+
+  {
+    "categoryId": "lunch",
+    "name": "Обед",
+    "price": 590,
+    "tags": ["market"],
+    "lunchOnly": true,
+    "desc": "мисо с тофу / карааге / рис",
+    "detail": {
+      "img": null,
+      "comp": "мисо с тофу / карааге / рис",
+      "kcal": 780, "b": 38, "j": 24, "u": 92
+    }
+  }
+]
