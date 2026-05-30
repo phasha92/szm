@@ -129,7 +129,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/tataki/tuna.jpg",
       "comp": "тунец / манго / папайя / сыр / гуакамоле",
       "kcal": 420, "b": 20, "j": 15, "u": 48
     }
@@ -142,7 +142,7 @@
     "tags": ["market"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/tataki/salmon.jpg",
       "comp": "лосось / манго / папайя / сыр / гуакамоле",
       "kcal": 460, "b": 24, "j": 18, "u": 49
     }
