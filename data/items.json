@@ -199,7 +199,7 @@
     "tags": ["market", "fried"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/crunchy/tuna.webp",
       "comp": "тунец / сыр / икра / панировка",
       "kcal": 490, "b": 23, "j": 22, "u": 48
     }
@@ -213,7 +213,7 @@
     "tags": ["market", "fried"],
     "desc": "",
     "detail": {
-      "img": null,
+      "img": "data/images/crunchy/salmon_eel.webp",
       "comp": "лосось / угорь / сыр / панировка",
       "kcal": 580, "b": 27, "j": 30, "u": 52
     }
